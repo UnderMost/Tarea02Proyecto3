@@ -1,0 +1,57 @@
+<div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">In stock</th>
+            <th scope="col">Catgeory</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of itemList; track $index) {
+            <tr>
+              <th scope="row">{{item.id}}</th>
+              <td>{{item.name}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.price}}</td>
+              <td>{{item.stockQuantity}}</td>
+              <td>{{item.category}}</td>
+              <td>
+                <button 
+                  type="button" 
+                  (click)="showDetailModal(item, detailModal)"
+                  class="btn btn-secondary me-3">
+                  <i class="fa-solid fa-eye white"
+                  ></i>
+                </button>
+                <button 
+                  type="button"
+                  (click)="deleteProduct(item);" 
+                  class="btn btn-danger">
+                  <i class="fa-solid fa-trash white"
+                  ></i>
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="text-center">There are not products to show</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <app-modal #detailModal>
+    <app-product-form
+      [product]="selectedItem"
+      [action]="'Update product'"
+      (callParentEvent)="handleFormAction($event)"
+    />
+  </app-modal>

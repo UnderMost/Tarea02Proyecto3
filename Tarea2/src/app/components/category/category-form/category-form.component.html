@@ -1,0 +1,38 @@
+
+<form class="container">
+  <div>
+    <h2>{{ action }}</h2>
+  </div>
+  <div class="row">
+    <div class="col-6 mb-2">
+      <input #name="ngModel" type="text" class="form-control" id="name" name="name" 
+        placeholder="Name"
+        [(ngModel)]="category.name" 
+        [ngClass]="{ 
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+        }" 
+        required 
+      />
+    </div>
+    <div class="col-6 mb-2">
+      <input #description="ngModel" type="text" class="form-control" id="description" name="description" 
+        placeholder="Description"
+        [(ngModel)]="category.description" 
+        [ngClass]="{ 
+          'is-invalid': description.invalid && description.touched,
+          'is-valid': description.valid && description.touched
+        }" 
+        required 
+      />
+    </div>
+    <div class="col-6">
+      <button
+      (click)="callEvent();"
+      type="button"
+      class="btn btn-primary d-flex align-items-center">
+      <p class="mb-0"> {{action}} </p>
+    </button>
+    </div>
+  </div>
+</form>

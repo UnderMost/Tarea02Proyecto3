@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div>
+    <h2>Products</h2>
+  </div>
+  <div>
+    @defer {
+      <div class="d-flex justify-content-end pb-2">
+        <button
+          (click)="addModal.show()" 
+          type="button" 
+          class="btn btn-primary d-flex align-items-center">
+          <i class="fa-solid fa-plus white"></i>
+          <p class="mb-0">Add product</p>
+        </button>
+      </div>
+      <app-product-list
+      [areActionsAvailable]="areActionsAvailable"
+      [itemList]="productService.items$()"
+      />
+    } @loading (after 100ms; minimum 1s){
+      <app-loader></app-loader>
+    }
+  </div>
+</div>
+
+<app-modal #addModal>
+  <app-product-form
+    [action]="'Add product'"
+    (callParentEvent)="handleFormAction($event)" 
+  />
+</app-modal>

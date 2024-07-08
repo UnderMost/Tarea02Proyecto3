@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div>
+    <h2>Categories</h2>
+  </div>
+  <div>
+    @defer {
+      <div class="d-flex justify-content-end pb-2">
+        <button
+          (click)="addModal.show()" 
+          type="button" 
+          class="btn btn-primary d-flex align-items-center">
+          <i class="fa-solid fa-plus white"></i>
+          <p class="mb-0">Add category</p>
+        </button>
+      </div>
+      <app-category-list
+      [areActionsAvailable]="areActionsAvailable"
+      [itemList]="categoryService.items$()"
+      />
+    } @loading (after 100ms; minimum 1s){
+      <app-loader></app-loader>
+    }
+  </div>
+</div>
+
+<app-modal #addModal>
+  <app-category-form
+    [action]="'Add category'"
+    (callParentEvent)="handleFormAction($event)" 
+  />
+</app-modal>
+
